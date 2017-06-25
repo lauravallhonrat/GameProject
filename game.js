@@ -53,4 +53,12 @@ function Game(){
         { name: "kinghearts",  img: "king_of_hearts.png" },
         { name: "kingspades",  img: "king_of_spades.png" },
     ]
+  
+    this.playerCards = [];
+    this.dealerCards = [];
+    this.shuffleCards();
 };
+
+Game.prototype.shuffleCards = function(){
+  this.cards=_.shuffle(this.cards);
+}
