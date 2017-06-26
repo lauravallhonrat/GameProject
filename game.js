@@ -100,10 +100,10 @@ Game.prototype.computerHand = function(card){
 
 Game.prototype.calculateCardValues = function(){
 
-     if(this.totalPlayerPoints > this.totalComputerPoints && this.totalPlayerPoints <= 21|| this.totalPlayerPoints === 21 || this.totalComputerPoints > 21){
-        console.log('playerwin');
-     }else if( this.totalPlayerPoints < this.totalComputerPoints && this.totalComputerPoints <= 21|| this.totalComputerPoints === 21 || this.totalPlayerPoints > 21){
-         console.log('computerwin');
+     if(this.totalPlayerPoints <= 21 && this.playerCards.length > 3|| this.totalPlayerPoints === 21 || this.totalComputerPoints > 21){
+        console.log('you win!');
+     }else if( this.totalComputerPoints <= 21 && this.playerCards.length > 3|| this.totalComputerPoints === 21 || this.totalPlayerPoints > 21){
+         console.log('you lose!');
      }
      
 }
@@ -118,14 +118,17 @@ $(document).ready(function(){
  var game = new Game();
  //call 2 times as default computer cards
  $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+   $('img').addClass('animated fadeInRight');
     game.computerHand(game.cards[0]);
  $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+    $('img').addClass('animated fadeInRight');
     game.computerHand(game.cards[0]);
     game.calculateCardValues();
 
 //when click button hit adds player card
 $('.button-hit').click( function(){
      $('.player-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+       $('img').addClass('animated fadeInRight');
       game.playerHand(game.cards[0]);
       game.calculateCardValues();
 });
@@ -135,6 +138,7 @@ $('.button-stand').click( function(){
     
     if(game.totalPlayerPoints>game.totalComputerPoints){
         $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+         $('img').addClass('animated fadeInRight');
         game.computerHand(game.cards[0]);  
     }
     game.calculateCardValues();
