@@ -56,58 +56,57 @@ function Game(){
   
     this.playerCards = [];
     this.dealerCards = [];
-    this.cardValue = 0;
-    this.totalPoints = 0;
+    this.totalPlayerPoints = 0;
+    this.totalComputerPoints = 0;
     this.shuffleCards();
 
 };
 
-// function(){
-//             if(this.playerHand(this.cards.value) === 10 || this.computerHand(this.cards.value) === 10){
-//                 return 1
-//             }else{
-//                 return 11
-//             }
 
 Game.prototype.shuffleCards = function(){
     this.cards=_.shuffle(this.cards);
 }
 
-Game.prototype.getCardValue = function(){
-    return this.cards.value = this.cardValue;
-}
-
 Game.prototype.playerHand = function(card){
-    this.totalPoints = 0;//set default value so the sum only affects to playerHand
+    this.totalPlayerPoints = 0;//set default value so the sum only affects to playerHand
     this.playerCards.push(card);
     this.cards.shift();
-    this.getCardValue();
     for(var i = 0; i<this.playerCards.length; i++){
-        this.totalPoints+=this.playerCards[i].value
+        console.log("carta dins el for",this.playerCards[i])
+        //calcular valor as
+
+        this.totalPlayerPoints+=this.playerCards[i].value
+            if  (this.playerCards[i].value === 11 && this.totalPlayerPoints >= 10){
+            console.log("aceeee", this.playerCards[i])
+            this.playerCards[i].value = 1;
+        }
+        // if( this.totalPlayerPoints >= 10){
+        //     this.playerCards.sort(11).splice(11,1);
+        // }
+        console.log("array",this.playerCards)
     }
-    console.log('playerHand',this.totalPoints)
+    console.log('playerHand',this.totalPlayerPoints)
+     
 }
 Game.prototype.computerHand = function(card){
-    this.totalPoints = 0;//set default value so the sum only affects to computerHand
+    this.totalComputerPoints = 0;//set default value so the sum only affects to computerHand
     this.dealerCards.push(card);
     this.cards.shift();
-    this.getCardValue();
      for(var i = 0; i<this.dealerCards.length; i++){
-        this.totalPoints+=this.dealerCards[i].value
+        this.totalComputerPoints+=this.dealerCards[i].value
     }
-    console.log('computerHand',this.totalPoints)
-   
+    console.log('computerHand',this.totalComputerPoints)
 }
 
-// Game.prototype.calculateCardValues = function(){
-//      this.playerHand(card);
-//      this.computerHand(card);
-      
-   
-    
-    
+Game.prototype.calculateCardValues = function(){
 
-// }
+     if(this.totalPlayerPoints > this.totalComputerPoints && this.totalPlayerPoints <= 21|| this.totalPlayerPoints === 21 || this.totalComputerPoints > 21){
+        console.log('playerwin');
+     }else if( this.totalPlayerPoints < this.totalComputerPoints && this.totalComputerPoints <= 21|| this.totalComputerPoints === 21 || this.totalPlayerPoints > 21){
+         console.log('computerwin');
+     }
+     
+}
 //computerhand treurel del click, i que mostri una carta nomes començar el joc, 
 //player amb el primer boto demana cartes, i el segon boto es planta i computer pilla cartes fins el valor 17
 // manipular els valors de les cartes, si el valor supera 21 perds, si es igual guanyes, calcular el valor de cada un dels jugadors
@@ -117,18 +116,27 @@ Game.prototype.computerHand = function(card){
 $(document).ready(function(){
 
  var game = new Game();
-$('.wrapper').on('click', '.button1', function(){
+     game.computerHand(game.cards[0]);
+     game.computerHand(game.cards[0]);
+$('.wrapper').on('click', '.button-hit', function(){
       game.playerHand(game.cards[0]);
-
-      //setTimeout(function(){ 
-      game.computerHand(game.cards[0]);
+      game.calculateCardValues();
+});
+  
+$('.wrapper').on('click', '.button-stand', function(){   
     
+    if(game.totalPlayerPoints>game.totalComputerPoints){
+         game.computerHand(game.cards[0]);
+    }
+   
+      game.calculateCardValues();
+});
       //}, 1000);
       console.log(game.cards)
       console.log(game.playerCards);
       console.log(game.dealerCards);
 
-  
-    });
+
+    
 });
   
