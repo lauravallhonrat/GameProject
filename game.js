@@ -36,34 +36,10 @@ function Game(){
         { name: "10diamonds",  img: "10_of_diamonds.png" , value : 10},
         { name: "10hearts",  img: "10_of_hearts.png" , value : 10},
         { name: "10spades",  img: "10_of_spades.png" , value : 10},
-        { name: "aceclubs",  img: "ace_of_clubs.png" , value : function(){
-            if(this.playerHand(this.cards.value) === 10 || this.computerHand(this.cards.value) === 10){
-                return 1
-            }else{
-                return 11
-            }
-        }},
-        { name: "acediamonds",  img: "ace_of_diamonds.png" , value : function(){
-            if(this.playerHand(this.cards.value) === 10 || this.computerHand(this.cards.value) === 10){
-                return 1
-            }else{
-                return 11
-            }
-        }},
-        { name: "acehearts",  img: "ace_of_hearts.png" , value : function(){
-            if(this.playerHand(this.cards.value) === 10 || this.computerHand(this.cards.value) === 10){
-                return 1
-            }else{
-                return 11
-            }
-        }},
-        { name: "acespades",  img: "ace_of_spades.png" , value : function(){
-            if(this.playerHand(this.cards.value) === 10 || this.computerHand(this.cards.value) === 10){
-                return 1
-            }else{
-                return 11
-            }
-        }},
+        { name: "aceclubs",  img: "ace_of_clubs.png" , value : 11},
+        { name: "acediamonds",  img: "ace_of_diamonds.png" , value : 11},
+        { name: "acehearts",  img: "ace_of_hearts.png" , value : 11},
+        { name: "acespades",  img: "ace_of_spades.png" , value : 11},   
         { name: "jackclubs",  img: "jack_of_clubs.png" , value : 10},
         { name: "jackdiamonds",  img: "jack_of_diamonds.png" , value : 10},
         { name: "jackhearts",  img: "jack_of_hearts.png" , value : 10},
@@ -83,9 +59,15 @@ function Game(){
     this.cardValue = 0;
     this.totalPoints = 0;
     this.shuffleCards();
-    this.playerHand();
 
 };
+
+// function(){
+//             if(this.playerHand(this.cards.value) === 10 || this.computerHand(this.cards.value) === 10){
+//                 return 1
+//             }else{
+//                 return 11
+//             }
 
 Game.prototype.shuffleCards = function(){
     this.cards=_.shuffle(this.cards);
@@ -96,30 +78,53 @@ Game.prototype.getCardValue = function(){
 }
 
 Game.prototype.playerHand = function(card){
+    this.totalPoints = 0;//set default value so the sum only affects to playerHand
     this.playerCards.push(card);
     this.cards.shift();
     this.getCardValue();
-       
-      
+    for(var i = 0; i<this.playerCards.length; i++){
+        this.totalPoints+=this.playerCards[i].value
+    }
+    console.log('playerHand',this.totalPoints)
 }
 Game.prototype.computerHand = function(card){
+    this.totalPoints = 0;//set default value so the sum only affects to computerHand
     this.dealerCards.push(card);
     this.cards.shift();
     this.getCardValue();
+     for(var i = 0; i<this.dealerCards.length; i++){
+        this.totalPoints+=this.dealerCards[i].value
+    }
+    console.log('computerHand',this.totalPoints)
+   
 }
+
+// Game.prototype.calculateCardValues = function(){
+//      this.playerHand(card);
+//      this.computerHand(card);
+      
+   
+    
+    
+
+// }
+//computerhand treurel del click, i que mostri una carta nomes començar el joc, 
+//player amb el primer boto demana cartes, i el segon boto es planta i computer pilla cartes fins el valor 17
+// manipular els valors de les cartes, si el valor supera 21 perds, si es igual guanyes, calcular el valor de cada un dels jugadors
+
 
 //jquery
 $(document).ready(function(){
 
  var game = new Game();
 $('.wrapper').on('click', '.button1', function(){
-      game.playerHand();
+      game.playerHand(game.cards[0]);
 
       //setTimeout(function(){ 
-      game.computerHand();
+      game.computerHand(game.cards[0]);
     
       //}, 1000);
-      console.log(game.cards);
+      console.log(game.cards)
       console.log(game.playerCards);
       console.log(game.dealerCards);
 
