@@ -1,17 +1,20 @@
+body{
+    background: url(img/carpet.jpg);
+}
 .wrapper{
     width: auto;
-   position: absolute;
-   left: 35%;
-   top:10%;
 }
 h1{
     font-family: sans-serif;
     font-size: 45px;
-    align-self: center;
+    text-align: center;
+    color: #ff1d1d;
+    text-shadow: 5px 2px 6px #000;
 }
 .deck{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .computer-deck,.player-deck{
     display: flex;
