@@ -116,20 +116,29 @@ Game.prototype.calculateCardValues = function(){
 $(document).ready(function(){
 
  var game = new Game();
-     game.computerHand(game.cards[0]);
-     game.computerHand(game.cards[0]);
-$('.wrapper').on('click', '.button-hit', function(){
+ //call 2 times as default computer cards
+ $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+    game.computerHand(game.cards[0]);
+ $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+    game.computerHand(game.cards[0]);
+    game.calculateCardValues();
+
+//when click button hit adds player card
+$('.button-hit').click( function(){
+     $('.player-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
       game.playerHand(game.cards[0]);
       game.calculateCardValues();
 });
-  
-$('.wrapper').on('click', '.button-stand', function(){   
+
+//when you click stand and player points is bigger than computer points, computer throws 1 card
+$('.button-stand').click( function(){   
     
     if(game.totalPlayerPoints>game.totalComputerPoints){
-         game.computerHand(game.cards[0]);
+        $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+        game.computerHand(game.cards[0]);  
     }
+    game.calculateCardValues();
    
-      game.calculateCardValues();
 });
       //}, 1000);
       console.log(game.cards)
