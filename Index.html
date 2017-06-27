@@ -4,22 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <title>BlackJack game</title>
 </head>
 <body>
-    <div class="wrapper">
-        <h1>Black Jack Game</h1>
-        <section class="deck">
-            <div class="computer-deck"></div>
-            <div class="player-deck"></div>
-        </section>
-        <button class ="button-hit" type="">Hit</button>
-        <button class ="button-stand" type="">Stand</button>
-    </div>
-    
-    
+        <div class="wrapper">
+            <section class="deck">
+                <h1>Black Jack Game</h1>
+                <div class="computer-deck">
+                    <h1 class="dealer-tittle">Dealer: </h1>
+                </div>
+                <div class="player-deck">
+                    <h1 class="player-tittle">You: </h1>
+                </div>
+            </section>
+            <section class="score">
+                <div class="dealer-score">
+                    <h3>Dealer Score:</h3>
+                    <p>-</p>
+                </div>
+                 <div class="player-score">
+                    <h3>Player Score:</h3>
+                    <p></p>
+                </div> 
+            </section>
+            <section class="buttons">
+                <button class ="button-hit">Hit !</button>
+                <button class ="button-stand">Stand</button>
+                <button class ="button-again" onClick="window.location.reload();">Play Again</button>
+            </section> 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>

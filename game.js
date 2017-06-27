@@ -124,6 +124,11 @@ $(document).ready(function(){
     $('img').addClass('animated fadeInRight');
     game.computerHand(game.cards[0]);
     game.calculateCardValues();
+$('.player-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+      $('img').addClass('animated fadeInRight');
+      //$('div.player-score > p').text(''+game.this.playerCards[i].value+'');
+      game.playerHand(game.cards[0]);
+      game.calculateCardValues();
 
 //when click button hit adds player card
 $('.button-hit').click( function(){
