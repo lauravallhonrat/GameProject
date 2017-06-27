@@ -95,6 +95,7 @@ Game.prototype.computerHand = function(card){
      for(var i = 0; i<this.dealerCards.length; i++){
         this.totalComputerPoints+=this.dealerCards[i].value
     }
+    console.log('value computer ', this.dealerCards)
     console.log('computerHand',this.totalComputerPoints)
 }
 
@@ -112,41 +113,55 @@ Game.prototype.calculateCardValues = function(){
 // manipular els valors de les cartes, si el valor supera 21 perds, si es igual guanyes, calcular el valor de cada un dels jugadors
 
 
+
 //jquery
 $(document).ready(function(){
+        var firstTime = true;
 
- var game = new Game();
- //call 2 times as default computer cards
- $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
-   $('img').addClass('animated fadeInRight');
-    game.computerHand(game.cards[0]);
- $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
-    $('img').addClass('animated fadeInRight');
-    game.computerHand(game.cards[0]);
-    game.calculateCardValues();
-$('.player-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+ function addingDomToComputerHand(){
+    if(firstTime){
+        firstTime = false;
+                game.computerHand(game.cards[0]);
+
+        $('.computer-deck').append('<div class="computer-card '+game.dealerCards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>'); 
+                game.computerHand(game.cards[0]);
+        $('.computer-deck').append('<div class="computer-card img-back '+game.dealerCards[0].name+'"><img class="img-hide" src="img/'+ game.cards[0].img+'" alt=""></div>');
+        $('img').addClass('animated fadeInRight');  
+        $('.computer-deck .computer-card:odd').addClass('animated fadeInRight'); 
+        game.calculateCardValues();        
+ }else{
+        $('.img-back').removeClass("img-back")
+        $('.img-hide').removeClass("img-hide")
+        $('.computer-deck .computer-card:odd').addClass('animated flipInY');
+        $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
+        $('img').addClass('animated fadeInRight');
+        game.computerHand(game.cards[0]);
+        game.calculateCardValues();
+        }
+ }
+  function addingDomToPlayerHand(){
+    game.playerHand(game.cards[0]);
+
+    $('.player-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
       $('img').addClass('animated fadeInRight');
-      //$('div.player-score > p').text(''+game.this.playerCards[i].value+'');
-      game.playerHand(game.cards[0]);
+      $('div.player-score > p').text(''+ game.totalPlayerPoints+'');
       game.calculateCardValues();
-
-//when click button hit adds player card
-$('.button-hit').click( function(){
-     $('.player-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
-       $('img').addClass('animated fadeInRight');
-      game.playerHand(game.cards[0]);
-      game.calculateCardValues();
-});
+ }
+    var game = new Game();
+    //call 2 times as default computer cards
+    addingDomToComputerHand();
+    addingDomToPlayerHand();
+    //when click button hit adds player card
+    $('.button-hit').click( function(){
+        addingDomToPlayerHand();
+    });
 
 //when you click stand and player points is bigger than computer points, computer throws 1 card
 $('.button-stand').click( function(){   
-    
+
     if(game.totalPlayerPoints>game.totalComputerPoints){
-        $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
-         $('img').addClass('animated fadeInRight');
-        game.computerHand(game.cards[0]);  
+        addingDomToComputerHand();
     }
-    game.calculateCardValues();
    
 });
       //}, 1000);

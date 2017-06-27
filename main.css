@@ -155,3 +155,15 @@ h1{
     background-image: linear-gradient(to bottom, #ff5454, #c73030);
     text-decoration: none;
 }
+
+.img-hide{
+    display:none;
+}
+
+.img-back{
+    background: url(img/card-back-blue.jpg) no-repeat;
+    background-size: cover;
+    width: 150px;
+    height: 200px;
+    margin-top: 10px;
+}
