@@ -166,4 +166,6 @@ h1{
     width: 150px;
     height: 200px;
     margin-top: 10px;
+    border-radius: 6px;
+    margin-left: 10px;
 }

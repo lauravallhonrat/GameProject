@@ -72,19 +72,9 @@ Game.prototype.playerHand = function(card){
     this.playerCards.push(card);
     this.cards.shift();
     for(var i = 0; i<this.playerCards.length; i++){
-        console.log("carta dins el for",this.playerCards[i])
-        //calcular valor as
-
         this.totalPlayerPoints+=this.playerCards[i].value
-            if  (this.playerCards[i].value === 11 && this.totalPlayerPoints >= 10){
-            console.log("aceeee", this.playerCards[i])
-            this.playerCards[i].value = 1;
-        }
-        // if( this.totalPlayerPoints >= 10){
-        //     this.playerCards.sort(11).splice(11,1);
-        // }
-        console.log("array",this.playerCards)
     }
+    console.log("array",this.playerCards)
     console.log('playerHand',this.totalPlayerPoints)
      
 }
@@ -99,56 +89,92 @@ Game.prototype.computerHand = function(card){
     console.log('computerHand',this.totalComputerPoints)
 }
 
-Game.prototype.calculateCardValues = function(){
+Game.prototype.calculateIfYouWinOrLose = function(){
+    console.log('check if stand',checkIfStand)
+    if(checkIfStand === false){
+        if(this.totalPlayerPoints === 21){
+            alert('you win! Black jack');
+        }
+        else if(this.totalPlayerPoints > 21){
+            alert('you lose!');
+        }
+    }
 
-     if(this.totalPlayerPoints <= 21 && this.playerCards.length > 3|| this.totalPlayerPoints === 21 || this.totalComputerPoints > 21){
-        console.log('you win!');
-     }else if( this.totalComputerPoints <= 21 && this.playerCards.length > 3|| this.totalComputerPoints === 21 || this.totalPlayerPoints > 21){
-         console.log('you lose!');
-     }
+    if(checkIfStand === true){
+        if(this.totalComputerPoints > 21){
+            alert("You win, computer busted")
+        }else if(this.totalPlayerPoints>this.totalComputerPoints ){
+            alert('you win! your score is higher than the dealer');
+        }else if(this.totalComputerPoints === 21){
+            alert('you lose! the dealer has Black jack');
+        
+        }else if(this.totalPlayerPoints<this.totalComputerPoints){
+            alert('you lose! the dealer has higher score');
+        }else if(this.totalComputerPoints === this.totalComputerPoints){
+            alert('Draw!');
+        }
+    }   
      
 }
-//computerhand treurel del click, i que mostri una carta nomes començar el joc, 
-//player amb el primer boto demana cartes, i el segon boto es planta i computer pilla cartes fins el valor 17
-// manipular els valors de les cartes, si el valor supera 21 perds, si es igual guanyes, calcular el valor de cada un dels jugadors
 
-
+var checkIfStand = false;
 
 //jquery
 $(document).ready(function(){
-        var firstTime = true;
+    var firstTimeComputerCards = true;
+    var firstTimePlayerCards = true;
 
  function addingDomToComputerHand(){
-    if(firstTime){
-        firstTime = false;
-                game.computerHand(game.cards[0]);
-
-        $('.computer-deck').append('<div class="computer-card '+game.dealerCards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>'); 
-                game.computerHand(game.cards[0]);
-        $('.computer-deck').append('<div class="computer-card img-back '+game.dealerCards[0].name+'"><img class="img-hide" src="img/'+ game.cards[0].img+'" alt=""></div>');
-        $('img').addClass('animated fadeInRight');  
-        $('.computer-deck .computer-card:odd').addClass('animated fadeInRight'); 
-        game.calculateCardValues();        
- }else{
-        $('.img-back').removeClass("img-back")
-        $('.img-hide').removeClass("img-hide")
-        $('.computer-deck .computer-card:odd').addClass('animated flipInY');
-        $('.computer-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
-        $('img').addClass('animated fadeInRight');
+    if(firstTimeComputerCards){
+        firstTimeComputerCards = false;
         game.computerHand(game.cards[0]);
-        game.calculateCardValues();
-        }
+        $('.computer-deck').append('<div class="computer-card '+game.dealerCards[0].name+'"><img src="img/'+ game.dealerCards[0].img+'" alt=""></div>'); 
+        game.computerHand(game.cards[0]);
+        $('.computer-deck').append('<div class="computer-card img-back '+game.dealerCards[game.dealerCards.length-1].name+'"><img class="img-hide" src="img/'+ game.dealerCards[game.dealerCards.length-1].img+'" alt=""></div>');  
+        $('img').addClass('animated fadeInRight');  
+        $('.computer-deck .computer-card:odd').addClass('animated fadeInRight');      
+    }else if(game.totalComputerPoints>=17){
+        $('.img-back').removeClass("img-back");
+        $('.img-hide').removeClass("img-hide");
+        $('.computer-deck .computer-card:odd').addClass('animated flipInY');
+        $('div.dealer-score > p').text(''+game.totalComputerPoints+'');
+    }else{
+        while(game.totalComputerPoints<17){
+            $('.img-back').removeClass("img-back")
+            $('.img-hide').removeClass("img-hide")
+            $('.computer-deck .computer-card:odd').addClass('animated flipInY');
+            game.computerHand(game.cards[0]);
+            $('.computer-deck').append('<div class="computer-card '+game.dealerCards[game.dealerCards.length-1].name+'"><img src="img/'+ game.dealerCards[game.dealerCards.length-1].img+'" alt=""></div>'); 
+            $('img').addClass('animated fadeInRight');
+            $('div.dealer-score > p').text(''+game.totalComputerPoints+'');
+        }       
+    }
  }
-  function addingDomToPlayerHand(){
-    game.playerHand(game.cards[0]);
 
-    $('.player-deck').append('<div class="computer-card '+game.cards[0].name+'"><img src="img/'+ game.cards[0].img+'" alt=""></div>');   
-      $('img').addClass('animated fadeInRight');
-      $('div.player-score > p').text(''+ game.totalPlayerPoints+'');
-      game.calculateCardValues();
+  function addingDomToPlayerHand(){
+
+    if(firstTimePlayerCards){
+        firstTimePlayerCards = false;
+        game.playerHand(game.cards[0]);
+        $('.player-deck').append('<div class="computer-card '+game.playerCards[0].name+'"><img src="img/'+ game.playerCards[0].img+'" alt=""></div>');   
+        game.playerHand(game.cards[0]);
+        $('.player-deck').append('<div class="computer-card '+game.playerCards[game.playerCards.length-1].name+'"><img src="img/'+ game.playerCards[game.playerCards.length-1].img+'" alt=""></div>');   
+        game.calculateIfYouWinOrLose();
+        $('img').addClass('animated fadeInRight');
+        $('div.player-score > p').text(''+ game.totalPlayerPoints+'');
+           
+    }else{
+        game.playerHand(game.cards[0]);
+        $('.player-deck').append('<div class="computer-card '+game.playerCards[game.playerCards.length-1].name+'"><img src="img/'+ game.playerCards[game.playerCards.length-1].img+'" alt=""></div>');  
+        game.calculateIfYouWinOrLose();
+        $('img').addClass('animated fadeInRight');
+        $('div.player-score > p').text(''+ game.totalPlayerPoints+'');
+         
+    }
  }
+
     var game = new Game();
-    //call 2 times as default computer cards
+    //adding default cards when game starts
     addingDomToComputerHand();
     addingDomToPlayerHand();
     //when click button hit adds player card
@@ -156,15 +182,12 @@ $(document).ready(function(){
         addingDomToPlayerHand();
     });
 
-//when you click stand and player points is bigger than computer points, computer throws 1 card
-$('.button-stand').click( function(){   
-
-    if(game.totalPlayerPoints>game.totalComputerPoints){
-        addingDomToComputerHand();
-    }
-   
-});
-      //}, 1000);
+    $('.button-stand').click( function(){
+        checkIfStand = true   
+        addingDomToComputerHand(); 
+        game.calculateIfYouWinOrLose(); 
+    });
+      
       console.log(game.cards)
       console.log(game.playerCards);
       console.log(game.dealerCards);
