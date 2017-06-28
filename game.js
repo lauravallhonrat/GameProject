@@ -144,25 +144,38 @@ Game.prototype.calculateIfYouWinOrLose = function(){
     console.log('check if stand',checkIfStand)
     if(checkIfStand === false){
         if(this.totalPlayerPoints === 21){
-            alert('you win! Black jack');
+        $('.win-alert').removeClass('alert-hide');  
+        $('.win-alert').append('<h1 id="win-alert-tittle">You win!! Black Jack</h1>');  
+        $('.win-alert').addClass('animated bounceIn');  
         }
         else if(this.totalPlayerPoints > 21){
-            alert('you lose! you exceeded points!');
+        $('.lose-alert').removeClass('alert-hide');  
+        $('.lose-alert').append('<h1 id="lose-alert-tittle">You lose!! exceeded 21</h1>');  
+        $('.lose-alert').addClass('animated shake');
         }
     }
 
     if(checkIfStand === true){
         if(this.totalComputerPoints > 21){
-            alert("You win, computer busted")
+            $('.win-alert').removeClass('alert-hide');  
+            $('.win-alert').append('<h1 id="win-alert-tittle">You win!! Dealer Busted</h1>');  
+            $('.win-alert').addClass('animated bounceIn');  
         }else if(this.totalPlayerPoints>this.totalComputerPoints ){
-            alert('you win! your score is higher than the dealer');
+            $('.win-alert').removeClass('alert-hide');  
+            $('.win-alert').append('<h1 id="win-alert-tittle">You win!! higher score</h1>');  
+            $('.win-alert').addClass('animated bounceIn');  
         }else if(this.totalComputerPoints === 21){
-            alert('you lose! the dealer has Black jack');
-        
+            $('.lose-alert').removeClass('alert-hide');  
+            $('.lose-alert').append('<h1 id="lose-alert-tittle">You lose!! Dealer has Black Jack</h1>');  
+            $('.lose-alert').addClass('animated shake');
         }else if(this.totalPlayerPoints<this.totalComputerPoints){
-            alert('you lose! the dealer has higher score');
+            $('.lose-alert').removeClass('alert-hide');  
+            $('.lose-alert').append('<h1 id="lose-alert-tittle">You lose!! Dealer has higher score</h1>');  
+            $('.lose-alert').addClass('animated shake');
         }else if(this.totalComputerPoints === this.totalComputerPoints){
-            alert('Draw!');
+            $('.draw-alert').removeClass('alert-hide');  
+            $('.draw-alert').append('<h1 id="draw-alert-tittle">Draw!!</h1>');  
+            $('.draw-alert').addClass('animated fadeIn');
         }
     }   
      
