@@ -36,10 +36,10 @@ function Game(){
         { name: "10diamonds",  img: "10_of_diamonds.png" , value : 10},
         { name: "10hearts",  img: "10_of_hearts.png" , value : 10},
         { name: "10spades",  img: "10_of_spades.png" , value : 10},
-        { name: "aceclubs",  img: "ace_of_clubs.png" , value : 11},
-        { name: "acediamonds",  img: "ace_of_diamonds.png" , value : 11},
-        { name: "acehearts",  img: "ace_of_hearts.png" , value : 11},
-        { name: "acespades",  img: "ace_of_spades.png" , value : 11},   
+        { name: "aceclubs",  img: "ace_of_clubs.png" , value : 0, ace: true},
+        { name: "acediamonds",  img: "ace_of_diamonds.png" , value : 0, ace: true},
+        { name: "acehearts",  img: "ace_of_hearts.png" , value : 0, ace: true},
+        { name: "acespades",  img: "ace_of_spades.png" , value : 0, ace: true},   
         { name: "jackclubs",  img: "jack_of_clubs.png" , value : 10},
         { name: "jackdiamonds",  img: "jack_of_diamonds.png" , value : 10},
         { name: "jackhearts",  img: "jack_of_hearts.png" , value : 10},
@@ -67,10 +67,57 @@ Game.prototype.shuffleCards = function(){
     this.cards=_.shuffle(this.cards);
 }
 
+Game.prototype.checkAcesValue = function(cards){
+    var tempPoints=0;
+    var arrAces = [];
+
+    cards.forEach(function(card){
+        if (card.ace === true) { //push all aces to the temp array
+        card.value=0;
+        arrAces.push(card)
+        }
+    });
+
+    cards.forEach(function(card){
+        tempPoints+=card.value
+    });
+    //check ace value posibilities if you have 1 ace
+    if (arrAces.length === 1) {
+        if (tempPoints + 11 === 21) {
+        arrAces[0].value = 11;
+        }
+        if (tempPoints + 1 === 21) {
+        arrAces[0].value = 1;
+        }
+        if (tempPoints + 11 < 21) {
+        arrAces[0].value = 11;
+        }
+        if (tempPoints + 11 > 21) {
+        arrAces[0].value = 1;
+        }
+    } else if (arrAces.length > 1) { //check ace value posibilities if you have more than 1 ace
+        for (var i = 0; i < arrAces.length; i++) {
+        if (tempPoints + 11 < 21) {
+            arrAces[i].value = 11;
+        }
+        if (tempPoints + 11 > 21) {
+            arrAces[i].value = 1;
+        }
+        }
+    }
+    arrAces = [] //clear the temp array
+}
+
 Game.prototype.playerHand = function(card){
     this.totalPlayerPoints = 0;//set default value so the sum only affects to playerHand
     this.playerCards.push(card);
     this.cards.shift();
+    this.playerCards.forEach(function(card){
+      console.log(card);
+      if (card.ace === true) {
+        this.checkAcesValue(this.playerCards)
+      }
+    }.bind(this))
     for(var i = 0; i<this.playerCards.length; i++){
         this.totalPlayerPoints+=this.playerCards[i].value
     }
@@ -78,10 +125,16 @@ Game.prototype.playerHand = function(card){
     console.log('playerHand',this.totalPlayerPoints)
      
 }
+
 Game.prototype.computerHand = function(card){
     this.totalComputerPoints = 0;//set default value so the sum only affects to computerHand
     this.dealerCards.push(card);
-    this.cards.shift();
+    this.cards.shift();  
+    this.dealerCards.forEach(function(card){
+     if (card.ace === true) {
+        this.checkAcesValue(this.dealerCards)
+      }
+    }.bind(this))
      for(var i = 0; i<this.dealerCards.length; i++){
         this.totalComputerPoints+=this.dealerCards[i].value
     }
@@ -96,7 +149,7 @@ Game.prototype.calculateIfYouWinOrLose = function(){
             alert('you win! Black jack');
         }
         else if(this.totalPlayerPoints > 21){
-            alert('you lose!');
+            alert('you lose! you exceeded points!');
         }
     }
 
