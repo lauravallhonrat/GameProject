@@ -251,7 +251,27 @@ $(document).ready(function(){
         addingDomToComputerHand(); 
         game.calculateIfYouWinOrLose(); 
     });
-      
+    
+
+    //voice recognition
+            if (annyang) {
+            // Let's define a command.
+            var commands = {
+                'hint': function() { addingDomToPlayerHand() },
+                'stand':  function() {
+                                            checkIfStand = true   
+                                            addingDomToComputerHand(); 
+                                            game.calculateIfYouWinOrLose(); 
+                                         },
+                'play again': function(){window.location.reload()}
+            };
+            annyang.debug(true);
+            // Add our commands to annyang
+            annyang.addCommands(commands);
+            // Start listening.
+            annyang.start();
+            }
+
       console.log(game.cards)
       console.log(game.playerCards);
       console.log(game.dealerCards); 
