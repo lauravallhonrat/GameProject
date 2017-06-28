@@ -59,9 +59,7 @@ function Game(){
     this.totalPlayerPoints = 0;
     this.totalComputerPoints = 0;
     this.shuffleCards();
-
 };
-
 
 Game.prototype.shuffleCards = function(){
     this.cards=_.shuffle(this.cards);
@@ -243,9 +241,6 @@ $(document).ready(function(){
       
       console.log(game.cards)
       console.log(game.playerCards);
-      console.log(game.dealerCards);
-
-
-    
+      console.log(game.dealerCards); 
 });
   
