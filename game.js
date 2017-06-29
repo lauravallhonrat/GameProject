@@ -261,7 +261,7 @@ $(document).ready(function(){
                                             addingDomToComputerHand(); 
                                             game.calculateIfYouWinOrLose(); 
                                          },
-                'play': function(){window.location.href()},
+                'play': function(){window.location.href},
                 'play again': function(){window.location.reload()}     
             };
             annyang.debug(true);      
