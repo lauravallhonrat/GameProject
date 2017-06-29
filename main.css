@@ -31,28 +31,7 @@ h1{
     color: #1dffe3;
     text-shadow: 5px 2px 6px #000;
 }
-.button-start{
-    margin: 20px 0 20px 0;
-    background: #d93434;
-    background-image: linear-gradient(to bottom, #d93434, #7a0000);
-    border-radius: 7px;
-    box-shadow: 0px 1px 3px #666666;
-    font-family: Arial;
-    font-size: 20px;
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
-}
 
-.button-start:hover {
-    background: #ff3d3d;
-    background-image: linear-gradient(to bottom, #ff3d3d, #ff3333);
-
-}
-.button-start>a{
-    text-decoration: none;
-    color: #ffffff;
-
-}
 .deck{
     display: flex;
     flex-direction: column;
@@ -64,40 +43,66 @@ h1{
     justify-content: center;
 }
 
+.btn {
+    cursor: pointer;
+    border-radius: 7px;
+    box-shadow: 0px 1px 3px #666666;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.button-start{
+    margin: 20px 0 20px 0;
+    background: #d93434;
+    background-image: linear-gradient(to bottom, #d93434, #7a0000);
+}
+
+.button-start:hover {
+    background: #ff3d3d;
+    background-image: linear-gradient(to bottom, #ff3d3d, #ff3333);
+
+}
+.button-start>a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
 .button-hit,.button-stand{
     margin: 0 1em 1em 0;
 }
 .button-hit{
   background: #34a5d9;
   background-image: linear-gradient(to bottom, #34a5d9, #004e78);
-  border-radius: 7px;
-  box-shadow: 0px 1px 3px #666666;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
 }
+
 .button-hit:hover{
   background: #26b3ff;
   background-image: linear-gradient(to bottom, #26b3ff, #006db5);
-  text-decoration: none;
 }
+
 .button-stand{
   background: #66c97a;
   background-image: linear-gradient(to bottom, #66c97a, #007826);
-  border-radius: 7px;
-  box-shadow: 0px 1px 3px #666666;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
 }
+
 .button-stand:hover {
   background: #57cf7d;
   background-image: linear-gradient(to bottom, #57cf7d, #1f9949);
-  text-decoration: none;
+
+}
+
+.button-again{
+    background: #ff0000;
+    background-image: linear-gradient(to bottom, #ff0000, #c22b2b);
+    height: 47px;
+}
+
+.button-again:hover{
+    background: #ff5454;
+    background-image: linear-gradient(to bottom, #ff5454, #c73030);
 }
 .main-content{
     display: flex;
@@ -143,22 +148,7 @@ h1{
 .dealer-score{
     margin-right: 3em;
 }
-.button-again{
-    background: #ff0000;
-    background-image: linear-gradient(to bottom, #ff0000, #c22b2b);
-    border-radius: 7px;
-    font-family: Arial;
-    color: #ffffff;
-    font-size: 20px;
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
-    height: 47px;
-}
-.button-again:hover{
-    background: #ff5454;
-    background-image: linear-gradient(to bottom, #ff5454, #c73030);
-    text-decoration: none;
-}
+
 
 .img-hide,.alert-hide{
     display:none;
