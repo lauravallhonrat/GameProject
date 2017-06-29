@@ -262,7 +262,7 @@ $(document).ready(function(){
                                             game.calculateIfYouWinOrLose(); 
                                          },
                 'play again': function(){window.location.reload()},
-                'play': function(){ }
+                'play': function(){window.location.href}
             };
             annyang.debug(true);      
             annyang.addCommands(commands);
