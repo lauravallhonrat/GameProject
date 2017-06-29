@@ -1,3 +1,7 @@
+//audio
+    var success = new Audio('sounds/magic_spell_trick_002.mp3');
+    var fail = new Audio('sounds/cartoon_fail_trumpet_001.mp3');
+//main constructor
 function Game(){
     this.cards = [
   		{ name: "2clubs",  img: "2_of_clubs.png" , value : 2 },
@@ -70,7 +74,7 @@ Game.prototype.checkAcesValue = function(cards){
     var arrAces = [];
 
     cards.forEach(function(card){
-        if (card.ace === true) { //push all aces to the temp array
+        if (card.ace === true) { //push all aces to the temp aces array
         card.value=0;
         arrAces.push(card)
         }
@@ -145,12 +149,20 @@ Game.prototype.calculateIfYouWinOrLose = function(){
         if(this.totalPlayerPoints === 21){
         $('.win-alert').removeClass('alert-hide');  
         $('.win-alert').append('<h1 id="win-alert-tittle">You win!! Black Jack</h1>');  
-        $('.win-alert').addClass('animated bounceIn');  
+        $('.win-alert').addClass('animated bounceIn'); 
+        //audio sound
+        success.play();
+        audioJazz.pause();
+
         }
         else if(this.totalPlayerPoints > 21){
         $('.lose-alert').removeClass('alert-hide');  
         $('.lose-alert').append('<h1 id="lose-alert-tittle">You lose!! exceeded 21</h1>');  
         $('.lose-alert').addClass('animated shake');
+        //audio sound
+        fail.play();
+        audioJazz.pause();
+
         }
     }
 
@@ -159,22 +171,42 @@ Game.prototype.calculateIfYouWinOrLose = function(){
             $('.win-alert').removeClass('alert-hide');  
             $('.win-alert').append('<h1 id="win-alert-tittle">You win!! Dealer Busted</h1>');  
             $('.win-alert').addClass('animated bounceIn');  
+            //audio sound
+            success.play();
+            audioJazz.pause();
+
         }else if(this.totalPlayerPoints>this.totalComputerPoints ){
             $('.win-alert').removeClass('alert-hide');  
             $('.win-alert').append('<h1 id="win-alert-tittle">You win!! higher score</h1>');  
-            $('.win-alert').addClass('animated bounceIn');  
+            $('.win-alert').addClass('animated bounceIn'); 
+            //audio sound
+            success.play(); 
+            audioJazz.pause();
+
         }else if(this.totalComputerPoints === 21){
             $('.lose-alert').removeClass('alert-hide');  
             $('.lose-alert').append('<h1 id="lose-alert-tittle">You lose!! Dealer has Black Jack</h1>');  
             $('.lose-alert').addClass('animated shake');
+            //audio sound
+            fail.play();
+            audioJazz.pause();
+
         }else if(this.totalPlayerPoints<this.totalComputerPoints){
             $('.lose-alert').removeClass('alert-hide');  
             $('.lose-alert').append('<h1 id="lose-alert-tittle">You lose!! Dealer has higher score</h1>');  
             $('.lose-alert').addClass('animated shake');
+            //audio sound
+            fail.play();
+            audioJazz.pause();
+
         }else if(this.totalComputerPoints === this.totalComputerPoints){
             $('.draw-alert').removeClass('alert-hide');  
             $('.draw-alert').append('<h1 id="draw-alert-tittle">Draw!!</h1>');  
             $('.draw-alert').addClass('animated fadeIn');
+            //audio sound
+            fail.play();
+            audioJazz.pause();
+
         }
     }   
      
@@ -237,6 +269,7 @@ $(document).ready(function(){
  }
 
     var game = new Game();
+
     //adding default cards when game starts
     addingDomToComputerHand();
     addingDomToPlayerHand();
@@ -250,7 +283,6 @@ $(document).ready(function(){
         addingDomToComputerHand(); 
         game.calculateIfYouWinOrLose(); 
     });
-    
 
     //voice recognition
             if (annyang) {
@@ -268,6 +300,5 @@ $(document).ready(function(){
             annyang.addCommands(commands);
             annyang.start();
             }
-
 });
   
