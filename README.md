@@ -18,6 +18,8 @@ You can either choose to ask for a card by using Hit  option or Stand optionto f
 
 the dealer draw his cards,then it compares the final score.
 
+*** This game has voice recognition! :) , it recognizes : "Play", "Hit", "Stand" and "Play Again".
+
 # Libraries used/resources:
 
 1. lodash : https://lodash.com/
