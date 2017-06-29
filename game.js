@@ -153,6 +153,8 @@ Game.prototype.calculateIfYouWinOrLose = function(){
         //audio sound
         success.play();
         audioJazz.pause();
+        $('.button-stand').attr('disabled', true);
+        $('.button-hit').attr('disabled', true);
 
         }
         else if(this.totalPlayerPoints > 21){
@@ -162,6 +164,8 @@ Game.prototype.calculateIfYouWinOrLose = function(){
         //audio sound
         fail.play();
         audioJazz.pause();
+        $('.button-stand').attr('disabled', true);
+        $('.button-hit').attr('disabled', true);
 
         }
     }
@@ -174,14 +178,18 @@ Game.prototype.calculateIfYouWinOrLose = function(){
             //audio sound
             success.play();
             audioJazz.pause();
+            $('.button-stand').attr('disabled', true);
+            $('.button-hit').attr('disabled', true);
 
-        }else if(this.totalPlayerPoints>this.totalComputerPoints ){
+        }else if(this.totalPlayerPoints>this.totalComputerPoints){
             $('.win-alert').removeClass('alert-hide');  
             $('.win-alert').append('<h1 id="win-alert-tittle">You win!! higher score</h1>');  
             $('.win-alert').addClass('animated bounceIn'); 
             //audio sound
             success.play(); 
             audioJazz.pause();
+            $('.button-stand').attr('disabled', true);
+            $('.button-hit').attr('disabled', true);
 
         }else if(this.totalComputerPoints === 21){
             $('.lose-alert').removeClass('alert-hide');  
@@ -190,6 +198,8 @@ Game.prototype.calculateIfYouWinOrLose = function(){
             //audio sound
             fail.play();
             audioJazz.pause();
+            $('.button-stand').attr('disabled', true);
+            $('.button-hit').attr('disabled', true);
 
         }else if(this.totalPlayerPoints<this.totalComputerPoints){
             $('.lose-alert').removeClass('alert-hide');  
@@ -198,6 +208,8 @@ Game.prototype.calculateIfYouWinOrLose = function(){
             //audio sound
             fail.play();
             audioJazz.pause();
+            $('.button-stand').attr('disabled', true);
+            $('.button-hit').attr('disabled', true);
 
         }else if(this.totalComputerPoints === this.totalComputerPoints){
             $('.draw-alert').removeClass('alert-hide');  
@@ -206,6 +218,8 @@ Game.prototype.calculateIfYouWinOrLose = function(){
             //audio sound
             fail.play();
             audioJazz.pause();
+            $('.button-stand').attr('disabled', true);
+            $('.button-hit').attr('disabled', true);
 
         }
     }   
