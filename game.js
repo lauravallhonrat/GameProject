@@ -255,7 +255,7 @@ $(document).ready(function(){
     //voice recognition
             if (annyang) {
             var commands = {
-                'hint': function() { addingDomToPlayerHand() },
+                'hit': function() { addingDomToPlayerHand() },
                 'stand':  function() {
                                             checkIfStand = true   
                                             addingDomToComputerHand(); 
