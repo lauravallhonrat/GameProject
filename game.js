@@ -266,7 +266,7 @@ $(document).ready(function(){
             };
             annyang.debug(true);      
             annyang.addCommands(commands);
-            annyang.start();
+            annyang.start({ autoRestart: true, continuous: false });
             }
 
 });
