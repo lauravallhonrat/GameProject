@@ -9,34 +9,22 @@
     <title>BlackJack game</title>
 </head>
 <body>
-        <div class="wrapper">
-            <section class="deck">
-                <h1>Black Jack Game</h1>
-                <div class="win-alert alert-hide"></div>
-                <div class="lose-alert alert-hide"></div>
-                <div class="draw-alert alert-hide"></div>
-                <div class="computer-deck">
-                    <h1 class="dealer-tittle">Dealer: </h1>
-                </div>
-                <div class="player-deck">
-                    <h1 class="player-tittle">You: </h1>
-                </div>
+    <div class="wrapper-intro">
+            <section class="main-content">
+                <h1>Instructions</h1>
+                <h2>Main Goal of the game:</h2>
+                <ul>
+                    <li>Get 21 points on the player's first two cards (called a "blackjack" or "natural"), without a dealer blackjack.</li>
+                    <li>Reach a final score higher than the dealer without exceeding 21.</li>
+                    <li>Let the dealer draw additional cards until their hand exceeds 21.</li>
+                </ul>
+                <h2>Game Flow:</h2>
+                <span>The game starts with 2 cards each on the table.The Dealer has 1 card flipped so you need to guess the score. :)</span>
+                <span>You can either choose to ask for a card by using <strong>Hit  option </strong>or <strong>Stand option</strong> to finish your turn and let the dealer draw his cards, then it compares the final score.</span>
+                <h2>Are you ready?</h2>
+                <button class="button-start"><a href="Game.html">Play</a></button>
             </section>
-            <section class="score">
-                <div class="dealer-score">
-                    <h3>Dealer Score:</h3>
-                    <p>-</p>
-                </div>
-                 <div class="player-score">
-                    <h3>Player Score:</h3>
-                    <p></p>
-                </div> 
-            </section>
-            <section class="buttons">
-                <button class ="button-hit">Hit !</button>
-                <button class ="button-stand">Stand</button>
-                <button class ="button-again" onClick="window.location.reload();">Play Again</button>
-            </section> 
+        </div> 
 </body>
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

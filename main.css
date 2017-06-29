@@ -107,6 +107,10 @@ h1{
     margin-left: 15%;
     margin-right: 15%;
 }
+.main-content>span{
+    width: 800px;
+    margin-left: 20px;
+}
 .computer-deck,.player-deck{
     display: flex;
     flex-direction: row;

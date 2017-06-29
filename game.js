@@ -111,7 +111,6 @@ Game.prototype.playerHand = function(card){
     this.playerCards.push(card);
     this.cards.shift();
     this.playerCards.forEach(function(card){
-      console.log(card);
       if (card.ace === true) {
         this.checkAcesValue(this.playerCards)
       }
@@ -255,7 +254,6 @@ $(document).ready(function(){
 
     //voice recognition
             if (annyang) {
-            // Let's define a command.
             var commands = {
                 'hint': function() { addingDomToPlayerHand() },
                 'stand':  function() {
@@ -265,15 +263,10 @@ $(document).ready(function(){
                                          },
                 'play again': function(){window.location.reload()}
             };
-            annyang.debug(true);
-            // Add our commands to annyang
+            annyang.debug(true);      
             annyang.addCommands(commands);
-            // Start listening.
             annyang.start();
             }
 
-      console.log(game.cards)
-      console.log(game.playerCards);
-      console.log(game.dealerCards); 
 });
   
