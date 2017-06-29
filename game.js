@@ -254,7 +254,6 @@ $(document).ready(function(){
 
     //voice recognition
             if (annyang) {
-                console.log('enters to annyang')
             var commands = {
                 'hit': function() { addingDomToPlayerHand() },
                 'stand':  function() {
@@ -262,7 +261,8 @@ $(document).ready(function(){
                                             addingDomToComputerHand(); 
                                             game.calculateIfYouWinOrLose(); 
                                          },
-                'play again': function(){window.location.reload()}
+                'play again': function(){window.location.reload()},
+                'play': function(){ }
             };
             annyang.debug(true);      
             annyang.addCommands(commands);
